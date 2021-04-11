@@ -1,0 +1,4 @@
+nginx/certs/learn-studio-api.crt
+nginx/certs/learn-studio-api.key
+nginx/certs/learn-studio.crt
+nginx/certs/learn-studio.key
