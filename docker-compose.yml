@@ -10,6 +10,7 @@ services:
       POSTGRES_USER: node_user
       POSTGRES_PASSWORD: node_password
       POSTGRES_DB: learn_db
+    restart: on-failure
 
 #   redis:
 #     image: redis:3.2-alpine
@@ -21,6 +22,7 @@ services:
     depends_on:
       - postgres
     #   - redis
+    restart: on-failure
     ports:
       - 3000
     environment:
@@ -31,11 +33,12 @@ services:
 
   angular:
     build:
-      context: ../LearnStudio-Front/learnstudio
+      context: ../LearnStudio-Front
       dockerfile: Dockerfile.dev
     depends_on:
       - node
 #      - redis
+    restart: on-failure
     ports:
       - 80
     environment:
@@ -52,6 +55,7 @@ services:
     depends_on:
       - node
       - angular
+    restart: on-failure
     ports:
       - 8181:80
       - 4443:443

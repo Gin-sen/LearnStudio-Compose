@@ -29,7 +29,7 @@ services:
 
   angular:
     build:
-      context: ../LearnStudio-Front/learnstudio
+      context: ../LearnStudio-Front
       dockerfile: Dockerfile.prod
     depends_on:
       - node
