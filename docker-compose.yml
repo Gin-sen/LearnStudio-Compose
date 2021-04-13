@@ -40,8 +40,7 @@ services:
       - 80
     environment:
         BACKEND_INTERNAL_HOST: 'node:3000'
-        # BACKEND_EXTERNAL_HOST: 'http://learn-studio-api.test'
-        BACKEND_EXTERNAL_HOST: 'http://learn-studio-api.test:8080'
+        BACKEND_EXTERNAL_HOST: 'http://learn-studio-api.test:8181'
         #   REDIS_HOST: 'redis:6379'
     volumes: 
       - ../LearnStudio-Front/learnstudio:/app
@@ -50,12 +49,11 @@ services:
     build:
       context: ./nginx/
       dockerfile: Dockerfile
-    # image: nginx:latest
     depends_on:
       - node
       - angular
     ports:
-      - 8080:80
+      - 8181:80
       - 4443:443
     # volumes:
     #   - ./nginx/conf:/etc/nginx
