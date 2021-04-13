@@ -7,7 +7,7 @@ Ce projet permet de lancer tous les projets en même temps grâce à `docker-com
 - Docker
 - Cloner les dépots de manière à ce qu'ils soient tous dans le même dossier comme indiquée ci-dessous
 - openssl
-- (mode "dev") npm 15.14 pour `npm install`
+- (mode "dev") npm 7.7.6 pour `npm install`
 
 ## Respecter cette disposition !
 
