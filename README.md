@@ -60,8 +60,8 @@ Note : docker utilise un système de cache qui évite d'avoir à re-build des pa
 
 Toutes les applications devraient tourner et le nginx reverse proxy devrais servir les containers sur ces urls :
 
-- Frontend : `http://learn-studio.test:8080`
-- Backtend : `http://learn-studio-api.test:8080`
+- Frontend : `http://learn-studio.test:8181`
+- Backtend : `http://learn-studio-api.test:8181`
 
 TODO: faire une conf nginx pour la redirection d'erreur pour le front (prod uniquement, marche en dev) acr en mode prod, le container angular est just un nginx
 
@@ -78,8 +78,8 @@ Lancer `docker-compose up --build` dans le projet `Learn-Compose`.
 
 Toutes les applications devraient tourner et le nginx reverse proxy devrais servir les containers sur ces urls :
 
-- Frontend : `http://learn-studio.test:8080`
-- Backtend : `http://learn-studio-api.test:8080`
+- Frontend : `http://learn-studio.test:8181`
+- Backtend : `http://learn-studio-api.test:8181`
 
 # Test
 
