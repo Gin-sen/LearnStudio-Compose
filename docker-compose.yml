@@ -2,15 +2,31 @@ version: "3.8"
 
 services:
 
-  postgres:
+  mongodb:
     build: 
-        context: ../Learn-Database/
-        dockerfile: Dockerfile
+      context: ../Learn-Database
+      dockerfile: Dockerfile
+    container_name: mongo
+    volumes:
+      - ../Learn-Database/data:/data/db
     environment:
-      POSTGRES_USER: node_user
-      POSTGRES_PASSWORD: node_password
-      POSTGRES_DB: learn_db
+      MONGO_INITDB_ROOT_USERNAME: node_user
+      MONGO_INITDB_ROOT_PASSWORD: learn123
+      MONGO_INITDB_DATABASE: learn_db
+    ports:
+     - "27017:27017"
     restart: on-failure
+
+  mongo-express:
+    image: mongo-express:0.54
+    depends_on: 
+      - mongodb
+    ports: 
+      - "8484:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: node_user
+      ME_CONFIG_MONGODB_ADMINPASSWORD: learn123
+    restart: always
 
 #   redis:
 #     image: redis:3.2-alpine
@@ -20,13 +36,13 @@ services:
       context: ../LearnStudio-Back/learn-studio-api
       dockerfile: Dockerfile.dev
     depends_on:
-      - postgres
+      - mongodb
     #   - redis
     restart: on-failure
     ports:
       - 3000
-    environment:
-        DATABASE_URL: 'postgres://node_user:node_password@postgres:5432/learn_db'
+    # environment:
+    #     DATABASE_URL: 'postgres://node_user:node_password@postgres:5432/learn_db'
     #   REDIS_HOST: 'redis:6379'
     volumes:
       - ../LearnStudio-Back/learn-studio-api:/app
