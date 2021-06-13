@@ -4,17 +4,17 @@ services:
 
   mongodb:
     build: 
-      context: ../Learn-Database
+      context: ./LearnStudio-Database
       dockerfile: Dockerfile
-    container_name: mongo
+    container_name: mongodb
     volumes:
-      - ../Learn-Database/data:/data/db
+      - ./LearnStudio-Database/data:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: node_user
       MONGO_INITDB_ROOT_PASSWORD: learn123
       MONGO_INITDB_DATABASE: learn_db
     ports:
-     - "27017:27017"
+     - 27017
     restart: on-failure
 
   mongo-express:
@@ -28,41 +28,38 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: learn123
     restart: always
 
-#   redis:
-#     image: redis:3.2-alpine
-
   node:
     build: 
-      context: ../LearnStudio-Back/learn-studio-api
+      context: ./LearnStudio-Back/learn-studio-api
       dockerfile: Dockerfile.dev
+    container_name: node
     depends_on:
       - mongodb
-    #   - redis
     restart: on-failure
     ports:
       - 3000
-    # environment:
-    #     DATABASE_URL: 'postgres://node_user:node_password@postgres:5432/learn_db'
-    #   REDIS_HOST: 'redis:6379'
+    environment:
+      MONGODB_URL: mongodb://node_user:learn123@mongodb:27017/learn_db?authSource=admin&readPreference=primary&ssl=false
+      PORT: 3000
+      JWT_KEY: YOLO
     volumes:
-      - ../LearnStudio-Back/learn-studio-api:/app
+      - ./LearnStudio-Back/learn-studio-api:/app
 
   angular:
     build:
-      context: ../LearnStudio-Front
+      context: ./LearnStudio-Front/learnstudio
       dockerfile: Dockerfile.dev
+    container_name: angular
     depends_on:
       - node
-#      - redis
     restart: on-failure
     ports:
       - 80
     environment:
-        BACKEND_INTERNAL_HOST: 'node:3000'
+        BACKEND_INTERNAL_HOST: 'http://node:3000'
         BACKEND_EXTERNAL_HOST: 'http://learn-studio-api.test:8181'
-        #   REDIS_HOST: 'redis:6379'
     volumes: 
-      - ../LearnStudio-Front/learnstudio:/app
+      - ./LearnStudio-Front/learnstudio:/home/node/app
 
   nginx:
     build:
@@ -75,6 +72,5 @@ services:
     ports:
       - 8181:80
       - 4443:443
-    # volumes:
-    #   - ./nginx/conf:/etc/nginx
-    #   - ./nginx/certs:/etc/ssl/private
+    volumes:
+      - ./nginx/certs:/etc/ssl/private
