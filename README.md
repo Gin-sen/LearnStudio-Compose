@@ -12,18 +12,21 @@ Ce projet permet de lancer tous les projets en même temps grâce à `docker-com
 ## Respecter cette disposition !
 
 ```txt
-.
-├── Learn-Compose
+Learn-Compose
+├── nginx
+│   ├── certs
+│   └── conf
 ├── Learn-Database
 ├── LearnStudio-Back
 └── LearnStudio-Front
 ```
 
 ```bash
-git clone https://LearnStudPro@dev.azure.com/LearnStudPro/LearnProject/_git/Learn-Compose
-git clone https://LearnStudPro@dev.azure.com/LearnStudPro/LearnProject/_git/Learn-Database
-git clone https://LearnStudPro@dev.azure.com/LearnStudPro/LearnProject/_git/LearnStudio-Back
-git clone https://LearnStudPro@dev.azure.com/LearnStudPro/LearnProject/_git/LearnStudio-Front
+git clone https://github.com/Gin-sen/Learn-Compose.git
+cd Learn-Compose
+git clone https://github.com/Gin-sen/Learn-Database.git
+git clone https://github.com/Gin-sen/LearnStudio-Back.git
+git clone https://github.com/Gin-sen/LearnStudio-Front.git
 ```
 
 
@@ -38,8 +41,8 @@ Dans le dossier `Learn-Compose`, entrer :
 ```bash
 mkdir nginx/certs
 cd nginx/certs
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout learn-studio-api.key -out learn-studio-api.crt
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout learn-studio.key -out learn-studio.crt
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout learn-studio-api.key -out learn-studio-api.crt # Pas besoin de rentrer quoi que ce soit 
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout learn-studio.key -out learn-studio.crt # Pas besoin de rentrer quoi que ce soit 
 ```
 
 Sur Windows, je sais pas.
@@ -129,9 +132,15 @@ Problème rencontré quand on lance le mode dev sans avoir installé les node_mo
 Fix : dans le dossier `./LearnStudio-Back/learn-studio-api` :
 - supprimer les nodes_modules s'il y en a 
 - supprimer le `package-lock.json`
-- Lancer la commande `npm install --save`
+- Lancer la commande `npm install`
 
 Vous devriez pouvoir lancer le `docker-compose up --build`. Dans le cas contraire, créez une issue dans les Work Items DevOps avec un maximum d'information pour le DevOps.
 
 # Contribute
 TODO: Explain how other users and developers can contribute to make your code better. 
+
+## Contribuer au Back/Front/Database
+
+Ce dépot ne prends en compte les changement que pour les fichiers autres que les sub-modules.
+
+Pour changer de branche dans le back avec votre IDE, ouvrez le projet `LearnStudio-Back` comme un projet indépendant. (ex: `code LearnStudio-Back` puis changer de branche, faire une modif, commit, ...).
