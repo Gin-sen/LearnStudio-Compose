@@ -141,6 +141,6 @@ TODO: Explain how other users and developers can contribute to make your code be
 
 ## Contribuer au Back/Front/Database
 
-Ce dépot ne prends en compte les changement que pour les fichiers autres que les sub-modules.
+Ce dépot prends en compte les changement pour les fichiers autres que les dépots clonés.
 
-Pour changer de branche dans le back avec votre IDE, ouvrez le projet `LearnStudio-Back` comme un projet indépendant. (ex: `code LearnStudio-Back` puis changer de branche, faire une modif, commit, ...).
+Pour changer de branche dans le back avec votre IDE, ouvrez le projet `LearnStudio-Back` comme un projet indépendant pour que l'IDE prenne le .git de ce projet. (ex: `code LearnStudio-Back` puis changer de branche, faire une modif, commit, ...).
